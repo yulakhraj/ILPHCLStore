@@ -1,0 +1,35 @@
+# Maven target directory
+/target/
+
+# Eclipse files
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA files
+*.iml
+.idea/
+
+# NetBeans files
+/nbproject/private/
+/build/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Maven specific
+/logs/
+/release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Others
+*.war
+*.ear
+*.zip
+*.tar.gz 
