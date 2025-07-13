@@ -30,7 +30,7 @@ ILP HCL Store is a demo e-commerce web application designed to showcase a basic 
 ## Project Folder Structure
 
 ```
-HCL_Store_CICD/
+ILP HCL Store/
 │
 ├── src/
 │   ├── main/
