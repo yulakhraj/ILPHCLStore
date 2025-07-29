@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Checkout Source') {
             steps {
-                git url: 'https://github.com/your-org/HCL_Store_CICD.git', branch: 'main'
+                git url: 'https://github.com/yulakhraj/ILPHCLStore.git', branch: 'main'
             }
         }
 
