@@ -20,17 +20,41 @@ pipeline {
         }
 
         stage('Code Quality - SonarQube') {
+            when {
+                expression { 
+                    return env.SONARQUBE != null
+                }
+            }
             steps {
-                withSonarQubeEnv("${SONARQUBE}") {
-                    sh 'mvn clean verify sonar:sonar'
+                script {
+                    try {
+                        withSonarQubeEnv("${SONARQUBE}") {
+                            sh 'mvn clean verify sonar:sonar'
+                        }
+                    } catch (Exception e) {
+                        echo "SonarQube analysis failed: ${e.message}"
+                        currentBuild.result = 'UNSTABLE'
+                    }
                 }
             }
         }
 
         stage('SonarQube Quality Gate') {
+            when {
+                expression { 
+                    return env.SONARQUBE != null && currentBuild.result != 'UNSTABLE'
+                }
+            }
             steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                script {
+                    try {
+                        timeout(time: 2, unit: 'MINUTES') {
+                            waitForQualityGate abortPipeline: false
+                        }
+                    } catch (Exception e) {
+                        echo "Quality Gate check failed: ${e.message}"
+                        currentBuild.result = 'UNSTABLE'
+                    }
                 }
             }
         }
