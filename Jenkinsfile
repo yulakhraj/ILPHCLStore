@@ -29,7 +29,7 @@ pipeline {
                 script {
                     try {
                         withSonarQubeEnv("${SONARQUBE}") {
-                            sh 'mvn clean verify sonar:sonar'
+                            bat 'mvn clean verify sonar:sonar'
                         }
                     } catch (Exception e) {
                         echo "SonarQube analysis failed: ${e.message}"
@@ -61,7 +61,7 @@ pipeline {
 
         stage('Build + Unit Test') {
             steps {
-                sh 'mvn clean install'
+                bat 'mvn clean test'
             }
             post {
                 always {
@@ -86,10 +86,10 @@ pipeline {
 
         stage('Deploy to Tomcat') {
             steps {
-                sh '''
-                curl -u your_jfrog_user:your_jfrog_api_key -O https://your-jfrog-server/artifactory/${ARTIFACT_PATH}
-                curl -u tomcat_user:tomcat_password -T ${WAR_NAME} "http://localhost:8080/manager/text/deploy?path=/HCLStore&update=true"
-                '''
+                bat '''
+curl -u your_jfrog_user:your_jfrog_api_key -O https://your-jfrog-server/artifactory/${ARTIFACT_PATH}
+curl -u tomcat_user:tomcat_password -T ${WAR_NAME} "http://localhost:8080/manager/text/deploy?path=/HCLStore&update=true"
+'''
             }
         }
     }
