@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SONARQUBE = 'SonarQubeServer'
-        ARTIFACTORY = 'JFrogArtifactory'
+        ARTIFACTORY = 'Artifactory'
         WAR_NAME = 'ILP_HCLStore.war'
         ARTIFACT_PATH = 'libs-release-local/com/hcl/ILP_HCLStore/1.0.0/ILP_HCLStore-1.0.0.war'
     }
